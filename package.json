@@ -1,0 +1,29 @@
+{
+  "name": "blockchainid",
+  "version": "1.0.0",
+  "description": "BlockchainID QRCode generator javascript library",
+  "main": "dist/blockchainid.js",
+  "scripts": {
+    "build:dev": "webpack --env.NODE_ENV=development --progress",
+    "build:prod": "webpack --env.NODE_ENV=production --progress",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "BlockchainID",
+    "OriginalMy",
+    "identity",
+    "QRCode"
+  ],
+  "author": "OriginalMy",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-preset-env": "^1.6.1",
+    "eslint": "^3.9.1",
+    "eslint-loader": "^1.6.1",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12"
+  }
+}

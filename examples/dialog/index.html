@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BlockchainID</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
+    <style>
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+      }
+      .container-center {
+        height: 100vh;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container container-center">
+      <div id="OMyID"></div>
+    </div>
+    <script src="../../dist/blockchainid.js"></script>
+    <script>
+      const OMyID = new BlockchainID({
+        el: "#OMyID", // button element ID
+        companyId: null,
+        infos: ["name", "email", "blockchainid", "id"], // https://omid.originalmy.com/documentation
+        mode: "dialog",
+      });
+      OMyID.onAuthenticate = function (nonce) {
+        console.log("Authentication OMyID", nonce);
+      };
+      OMyID.onExpire = function () {
+        console.log("Link OMyID expired");
+      };
+      OMyID.onCancel = function () {
+        console.log("Canceling...");
+      };
+    </script>
+  </body>
+</html>
