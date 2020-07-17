@@ -1,9 +1,3 @@
----
-id: blockchainid
-title: BlockchainID
-sidebar_label: BlockchainID
----
-
 # BlockchainID QR code
 
 BlockchainID is simple OAuth2 to request personal and verified data from OriginalMy users.
