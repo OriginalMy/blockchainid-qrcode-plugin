@@ -8,6 +8,18 @@ sidebar_label: BlockchainID
 
 BlockchainID is simple OAuth2 to request personal and verified data from OriginalMy users.
 
+## Installation
+
+```sh
+yarn add blockchainid
+```
+
+Or
+
+```sh
+npm install blockchainid
+```
+
 ## Import
 
 ```javascript
