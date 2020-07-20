@@ -11,3 +11,7 @@
 # 1.0.2
 
 - Fix button cursor and dialog box sizing
+
+# 1.0.3
+
+- Fix import URL on README.md
