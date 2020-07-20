@@ -1,5 +1,5 @@
 {
-  "name": "blockchainid",
+  "name": "@originalmy/blockchainid-qrcode-plugin",
   "version": "1.0.0",
   "description": "BlockchainID QRCode generator javascript library",
   "main": "dist/blockchainid.js",
