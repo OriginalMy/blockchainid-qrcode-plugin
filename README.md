@@ -23,7 +23,7 @@ const BlockchainID = require("blockchainid");
 Or
 
 ```javascript
-import * as BlockchainID from "blockchainid";
+import BlockchainID from "blockchainid";
 ```
 
 Or
