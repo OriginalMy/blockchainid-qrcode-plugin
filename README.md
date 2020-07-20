@@ -5,25 +5,25 @@ BlockchainID is simple OAuth2 to request personal and verified data from Origina
 ## Installation
 
 ```sh
-yarn add blockchainid
+yarn add @originalmy/blockchainid-qrcode-plugin
 ```
 
 Or
 
 ```sh
-npm install blockchainid
+npm install @originalmy/blockchainid-qrcode-plugin
 ```
 
 ## Import
 
 ```javascript
-const BlockchainID = require("blockchainid");
+const BlockchainID = require("@originalmy/blockchainid-qrcode-plugin");
 ```
 
 Or
 
 ```javascript
-import BlockchainID from "blockchainid";
+import BlockchainID from "@originalmy/blockchainid-qrcode-plugin";
 ```
 
 Or
