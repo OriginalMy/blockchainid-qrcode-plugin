@@ -48,6 +48,7 @@ BlockchainID.prototype.defaultOptions = {
     height: "50px",
     outline: "none",
     border: "none",
+    cursor: "pointer"
   },
   buttonIconStyle: {
     width: "30px",
@@ -55,7 +56,6 @@ BlockchainID.prototype.defaultOptions = {
     marginRight: "10px",
     lineHeight: "30px",
     verticalAlign: "middle",
-    cursor: "pointer"
   },
   buttonTextStyle: {
     textTransform: "uppercase",

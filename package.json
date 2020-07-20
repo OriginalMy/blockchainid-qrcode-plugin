@@ -1,11 +1,12 @@
 {
   "name": "@originalmy/blockchainid-qrcode-plugin",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "BlockchainID QRCode generator javascript library",
   "main": "dist/blockchainid.js",
   "scripts": {
     "build:dev": "webpack --env.NODE_ENV=development --progress",
     "build:prod": "webpack --env.NODE_ENV=production --progress",
+    "prepublish": "yarn build:prod",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [

@@ -1,6 +1,6 @@
 # BlockchainID QR code
 
-BlockchainID is simple OAuth2 to request personal and verified data from OriginalMy users.
+BlockchainID is a simple OAuth2 to request personal and verified data from OriginalMy users.
 
 ## Installation
 

@@ -15,3 +15,7 @@
 # 1.0.3
 
 - Fix import URL on README.md
+
+# 1.0.4
+
+- Add pre publish and fix button cursor
