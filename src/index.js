@@ -53,12 +53,17 @@ BlockchainID.prototype.defaultOptions = {
     width: "30px",
     height: "30px",
     marginRight: "10px",
+    lineHeight: "30px",
+    verticalAlign: "middle",
   },
   buttonTextStyle: {
     textTransform: "uppercase",
     fontWeight: "bold",
     fontSize: ".9rem",
     fontFamily: "'Poppins', sans-serif",
+    height: "30px",
+    lineHeight: "30px",
+    verticalAlign: "middle",
   },
   qrcodeStyle: {
     width: "300px",
