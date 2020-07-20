@@ -55,6 +55,7 @@ BlockchainID.prototype.defaultOptions = {
     marginRight: "10px",
     lineHeight: "30px",
     verticalAlign: "middle",
+    cursor: "pointer"
   },
   buttonTextStyle: {
     textTransform: "uppercase",
@@ -82,6 +83,7 @@ BlockchainID.prototype.defaultOptions = {
     position: "relative",
     borderRadius: "5px",
     zIndex: 1001,
+    boxSizing: 'border-box'
   },
   dialogBackdropStyle: {
     position: "fixed" /* Stay in place */,
@@ -93,6 +95,7 @@ BlockchainID.prototype.defaultOptions = {
     overflow: "auto" /* Enable scroll if needed */,
     backgroundColor: "rgb(0,0,0)" /* Fallback color */,
     backgroundColor: "rgba(0,0,0,0.4)" /* Black w/ opacity */,
+    boxSizing: 'border-box'
   },
   dialogLogoStyle: {
     width: "260px",
