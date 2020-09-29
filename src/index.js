@@ -20,7 +20,9 @@ const BlockchainID = function (options) {
     "Running in " + this.options.env === "prod" ? "Production" : "Staging"
   );
   this.setFontFace();
-  this.renderButton();
+  if (["kiosque", "link"].indexOf(this.options.mode) !== -1)
+    this.initAndStart();
+  else this.renderButton();
 };
 
 BlockchainID.prototype.defaultOptions = {
@@ -32,7 +34,7 @@ BlockchainID.prototype.defaultOptions = {
     "https://originalmy.com/assets/images/logos/new-om-logo-white-no-title.svg",
   buttonText: null,
   showQRCodeIcon: true,
-  mode: "body", // dialog | body
+  mode: "dialog", // dialog | body | kiosque | link
   dialogLogo:
     "https://originalmy.com/assets/images/logos/new-om-logo-with-horizontal-text.svg",
   lang: () => navigator.language || navigator.userLanguage || "en",
@@ -48,7 +50,7 @@ BlockchainID.prototype.defaultOptions = {
     height: "50px",
     outline: "none",
     border: "none",
-    cursor: "pointer"
+    cursor: "pointer",
   },
   buttonIconStyle: {
     width: "30px",
@@ -83,7 +85,7 @@ BlockchainID.prototype.defaultOptions = {
     position: "relative",
     borderRadius: "5px",
     zIndex: 1001,
-    boxSizing: 'border-box'
+    boxSizing: "border-box",
   },
   dialogBackdropStyle: {
     position: "fixed" /* Stay in place */,
@@ -95,7 +97,7 @@ BlockchainID.prototype.defaultOptions = {
     overflow: "auto" /* Enable scroll if needed */,
     backgroundColor: "rgb(0,0,0)" /* Fallback color */,
     backgroundColor: "rgba(0,0,0,0.4)" /* Black w/ opacity */,
-    boxSizing: 'border-box'
+    boxSizing: "border-box",
   },
   dialogLogoStyle: {
     width: "260px",
@@ -221,26 +223,42 @@ BlockchainID.prototype.getAuthNonce = function () {
 };
 
 BlockchainID.prototype.initBlockchainID = function () {
-  this._execTimeout = false;
   return this.getNonce()
     .then(
       function (data) {
-        if (data.status !== "success") return alert(data.data.message);
+        if (data.status !== "success") {
+          this._execTimeout = false;
+          return alert(data.data.message);
+        }
         this._execTimeout = true;
         this._nonce = data.data.auth;
+        if (typeof this.onURL === "function") this.onURL(this.getAuthURI());
         this.timeoutStatus = setTimeout(this.getAuth.bind(this), 5000);
         const el = document.querySelector(this.context);
         if (el) {
           if (this.checkIfIsMobileAndTablet()) {
-            const optionScheme = this.options.mobileScheme;
-            const scheme = optionScheme + "://" + optionScheme + "/login";
-            window.location.href =
-              scheme + "?uri=" + encodeURIComponent(this.getAuthURI());
+            window.location.href = this.getAuthURI();
           } else {
-            if (this.options.mode === "body") return this.renderQRCode();
-            this.renderDialog();
+            switch (this.options.mode) {
+              case "button":
+                window.location.href = this.getAuthURI();
+                break;
+              case "body":
+                this.renderQRCode();
+                break;
+              case "kiosque":
+                this.renderQRCode();
+                break;
+              case "link":
+                console.log(this.getAuthURI());
+                break;
+              default:
+                this.renderDialog();
+                break;
+            }
           }
-        } else alert("Element not found. Add a element with " + this.context);
+        } else if (this.options.mode !== "link")
+          alert("Element not found. Add a element with " + this.context);
       }.bind(this)
     )
     .catch(function (error) {
@@ -257,6 +275,8 @@ BlockchainID.prototype.getAuth = function () {
       function (data) {
         if (data && data.status !== "success") {
           if (data && data.data && data.data.type === "expired") {
+            if (["kiosque", "button", "link"].indexOf(this.options.mode) !== -1)
+              return this.initBlockchainID();
             this._execTimeout = false;
             this.renderButton();
             this.cancelAuth();
@@ -412,7 +432,7 @@ BlockchainID.prototype.renderQRCode = function (callback) {
     qrcode.style[property] = this.options.qrcodeStyle[property];
   qrcode.src = this.getQRCodeURL();
   qrcode.onload = function () {
-    if (this.options.mode === "body") {
+    if (["body", "kiosque"].indexOf(this.options.mode) !== -1) {
       el.innerHTML = "";
       el.appendChild(qrcodeContainer);
     }
@@ -420,13 +440,13 @@ BlockchainID.prototype.renderQRCode = function (callback) {
     if (typeof callback === "function") callback();
   }.bind(this);
   qrcodeContainer.appendChild(qrcode);
-  if (this.options.mode !== "body") return qrcodeContainer;
   return qrcodeContainer;
 };
 
 BlockchainID.prototype.renderButton = function () {
   const el = document.querySelector(this.context);
-  const button = document.createElement("button");
+  const button = document.createElement("div");
+  button.setAttribute("role", "button");
   button.style.display = "none";
   button.classList.add("BlockchainID-Button");
   button.addEventListener("focus", function (e) {
@@ -460,20 +480,24 @@ BlockchainID.prototype.renderButton = function () {
   this.button = button;
 };
 
+BlockchainID.prototype.initAndStart = function () {
+  this.initConfig()
+    .then(
+      function (resp) {
+        this.baseURL = resp.data.base_path;
+        this.startChecking();
+      }.bind(this)
+    )
+    .catch(function (err) {
+      console.error(err);
+    });
+};
+
 BlockchainID.prototype.onClick = function () {
   if (this.button) this.button.removeEventListener("click", this.onClick);
   this._execTimeout = true;
   if (!this.baseURL) {
-    this.initConfig()
-      .then(
-        function (resp) {
-          this.baseURL = resp.data.base_path;
-          this.startChecking();
-        }.bind(this)
-      )
-      .catch(function (err) {
-        console.error(err);
-      });
+    this.initAndStart();
   } else {
     this.startChecking();
   }

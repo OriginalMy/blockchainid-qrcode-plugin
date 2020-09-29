@@ -19,3 +19,9 @@
 # 1.0.4
 
 - Add pre publish and fix button cursor
+
+# 1.0.6
+
+- Add link and kiosque mode
+- Add more examples
+- Change default mode to dialog
