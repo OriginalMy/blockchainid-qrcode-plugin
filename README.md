@@ -79,7 +79,7 @@ List of informations to require from user. See the complete list in [documentati
 
 ### `mode`
 
-Values: dialog | body (default)
+Values: dialog | body | kiosque | link  (default: dialog)
 
 QR code display type
 
@@ -181,6 +181,10 @@ Function to be called when the QR code expires.
 ### `onCancel`
 
 Function to be called when user closes the dialog and cancel authentication.
+
+### `onURL`
+
+Function to be called when starts Blockchain session to get login URL.
 
 ## Contact
 
