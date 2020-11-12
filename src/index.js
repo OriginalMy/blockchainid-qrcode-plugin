@@ -236,26 +236,22 @@ BlockchainID.prototype.initBlockchainID = function () {
         this.timeoutStatus = setTimeout(this.getAuth.bind(this), 5000);
         const el = document.querySelector(this.context);
         if (el) {
-          if (this.checkIfIsMobileAndTablet()) {
-            window.location.href = this.getAuthURI();
-          } else {
-            switch (this.options.mode) {
-              case "button":
-                window.location.href = this.getAuthURI();
-                break;
-              case "body":
-                this.renderQRCode();
-                break;
-              case "kiosque":
-                this.renderQRCode();
-                break;
-              case "link":
-                console.log(this.getAuthURI());
-                break;
-              default:
-                this.renderDialog();
-                break;
-            }
+          switch (this.options.mode) {
+            case "button":
+              window.location.href = this.getAuthURI();
+              break;
+            case "body":
+              this.renderQRCode();
+              break;
+            case "kiosque":
+              this.renderQRCode();
+              break;
+            case "link":
+              console.log(this.getAuthURI());
+              break;
+            default:
+              this.renderDialog();
+              break;
           }
         } else if (this.options.mode !== "link")
           alert("Element not found. Add a element with " + this.context);
@@ -420,7 +416,9 @@ BlockchainID.prototype.renderDialog = function () {
 
 BlockchainID.prototype.renderQRCode = function (callback) {
   const el = document.querySelector(this.context);
-  const qrcodeContainer = document.createElement("div");
+  const qrcodeContainer = document.createElement("a");
+  if (this.checkIfIsMobileAndTablet())
+    qrcodeContainer.setAttribute("href", this.getAuthURI());
   qrcodeContainer.classList.add("BlockchainID-QRCode-Container");
   for (var property in this.options.qrcodeContainerStyle)
     qrcodeContainer.style[property] = this.options.qrcodeContainerStyle[
