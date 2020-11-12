@@ -25,3 +25,6 @@
 - Add link and kiosque mode
 - Add more examples
 - Change default mode to dialog
+
+# 1.0.7
+- Fix behavor on mobile

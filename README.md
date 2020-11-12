@@ -29,7 +29,7 @@ import BlockchainID from "@originalmy/blockchainid-qrcode-plugin";
 Or
 
 ```HTML
-<script src="https://unpkg.com/@originalmy/blockchainid-qrcode-plugin@1.0.2/dist/blockchainid.js"></script>
+<script src="https://unpkg.com/@originalmy/blockchainid-qrcode-plugin/dist/blockchainid.js"></script>
 ```
 
 ## Usage
