@@ -250,7 +250,11 @@ BlockchainID.prototype.initBlockchainID = function () {
               console.log(this.getAuthURI());
               break;
             default:
-              this.renderDialog();
+              if (this.checkIfIsMobileAndTablet()) {
+                window.location.href = this.getAuthURI();
+              } else {
+                this.renderDialog();
+              }
               break;
           }
         } else if (this.options.mode !== "link")
