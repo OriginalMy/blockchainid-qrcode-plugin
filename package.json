@@ -1,6 +1,6 @@
 {
   "name": "@originalmy/blockchainid-qrcode-plugin",
-  "version": "1.0.6",
+  "version": "1.0.8",
   "description": "BlockchainID QRCode generator javascript library",
   "main": "dist/blockchainid.js",
   "scripts": {
@@ -24,7 +24,7 @@
     "babel-preset-env": "^1.6.1",
     "eslint": "^3.9.1",
     "eslint-loader": "^1.6.1",
-    "webpack": "^4.43.0",
+    "webpack": "^4.46.0",
     "webpack-cli": "^3.3.12"
   }
 }
